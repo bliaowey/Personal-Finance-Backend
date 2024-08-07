@@ -7,8 +7,10 @@ import com.example.financebackend.mapper.EntityMapper;
 import com.example.financebackend.respository.AccountRecordRepository;
 import com.example.financebackend.service.AccountRecordService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,6 +40,13 @@ public class AccountRecordServiceImpl implements AccountRecordService {
     @Override
     public List<AccountRecordDto> getAllAccountRecords() {
         List<AccountRecord> accountRecords = accountRecordRepository.findAll();
+        return accountRecords.stream().map((accountRecord) -> EntityMapper.mapToAccountRecordDto(accountRecord))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AccountRecordDto> findLastFiveAccountRecords() {
+        List<AccountRecord> accountRecords = accountRecordRepository.findFirst5ByOrderByDateDesc();
         return accountRecords.stream().map((accountRecord) -> EntityMapper.mapToAccountRecordDto(accountRecord))
                 .collect(Collectors.toList());
     }

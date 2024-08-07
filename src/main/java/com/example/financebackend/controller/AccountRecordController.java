@@ -39,6 +39,13 @@ public class AccountRecordController {
         return ResponseEntity.ok(accountRecords);
     }
 
+    //Build Get Last 5 Account Records REST API
+    @GetMapping("/recent-transactions")
+    public ResponseEntity<List<AccountRecordDto>> getLastFiveAccountRecords() {
+        List<AccountRecordDto> accountRecords = accountRecordService.findLastFiveAccountRecords();
+        return ResponseEntity.ok(accountRecords);
+    }
+
     //Build Delete Account Record REST API
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteAccountRecord(@PathVariable("id") int accountRecordId) {

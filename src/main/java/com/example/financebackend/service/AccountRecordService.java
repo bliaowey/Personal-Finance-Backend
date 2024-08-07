@@ -16,6 +16,7 @@ public interface AccountRecordService {
     //Method for Getting all Account Records
     List<AccountRecordDto> getAllAccountRecords();
 
+    List<AccountRecordDto> findLastFiveAccountRecords();
     //Method for Deleting an Account Record
     void deleteAccountRecord(int accountRecordId);
 }
